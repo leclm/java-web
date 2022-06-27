@@ -1,15 +1,15 @@
 <h1 align="center">JAVA WEB</h1>
 
-<h2 align="center">About ?</h2>
+<h2 align="center">About 📖</h2>
    
 <p align="left">
-  This is a project that organizes all the content of the Web Development ll course at the Federal University of Paran�, where I use the Java programming language and the Glassfish server for the development of WEB pages. ?
+  This is a project that organizes all the content of the Web Development ll course at the Federal University of Paraná, where I use the Java programming language and the Glassfish server for the development of WEB pages 😊
 </p>
 <br>
 
 ---
 
-<h2 align="center">Technologies ?</h2>
+<h2 align="center">Technologies 🚀</h2>
 
 - [Java](https://docs.oracle.com/en/java/)
 - [Glassfish](https://glassfish.org/)
@@ -19,15 +19,15 @@
 
 ---
 
-<h2 align="center">License ?</h2>
+<h2 align="center">License 📝</h2>
 
 <p align="center">
-   This repository is under MIT license. You can see the <a href="https://github.com/leclm/java-web/blob/main/LICENSE">LICENSE</a> file for more details. ?
+   This repository is under MIT license. You can see the <a href="https://github.com/leclm/java-web/blob/main/LICENSE">LICENSE</a> file for more details. 😉
 </p>
 
 ---
 
->This project was developed by **[@Let�cia Lima](https://www.linkedin.com/in/leticiachagaslima/)**, as a way to improve my knowledge and pratice ?
+>This project was developed by **[@Letícia Lima](https://www.linkedin.com/in/leticiachagaslima/)**, as a way to improve my knowledge and pratice 💜
 
 ---
 
