@@ -121,25 +121,3 @@ public class LoginServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
-/*
-out.println("<html><head>");
-out.println("<title>Teste</title><link rel=\"stylesheet\" href=\"./style.css\"></head><body>");
-out.println("<header><h1>É diferente</h1></header>");            
-out.println("<section class=\"content-cards\">");
-out.println("<div class=\"container\">");
-out.println("<div class=\"vector-card\">");
-out.println("<ul>");
-out.println("<li>");
-out.println("<label for=\"mail\">E-mail:</label><input type=\"email\" id=\"mail\" name=\"user_email\" placeholder=\"example@example.com\">");
-out.println("</li>");        
-out.println("<li>");
-out.println("<label for=\"senha\">Senha:</label><input id=\"senha\" type=\"password\" name=\"user_senha\" placeholder=\"digite sua senha\">");
-out.println("</li>");  
-out.println("<li class=\"button\">");
-out.println("<button type=\"submit\" value=\"Entrar\">Entrar</button>");
-out.println("</li>");  
-out.println("</ul></div></div></section></form>");
-out.println("</body></html>");
-*/
