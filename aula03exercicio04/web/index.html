@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            p {
+                font-size: 24px;
+                text-transform: capitalize; 
+             }
+            ul {
+                list-style: none;
+            }
+            li {
+                display: flex;
+                justify-content: space-between;
+                width: 300px;
+                padding: 10px 0;
+            }
+            input, textarea {
+                width: 200px;
+            }
+            button {
+                background-color: green;
+                border-radius: 20px;
+                border: 1px solid black;
+                padding: 5px 20px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <p>Link para a Servlet: <a href="Form">Servlet Form</a></p>
+        <form action="Formulario" method="post">
+            <ul>
+              <li>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="user_name">
+              </li>
+              <li>
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="user_age">
+              </li>
+              <li>
+                <label for="bday">Birthday:</label>
+                <input id="bday" type="date"  name="user_bday" value="2017-06-01">
+              </li>
+              <li>
+                <label for="mail">E-mail:</label>
+                <input type="email" id="mail" name="user_email">
+              </li>
+              <li>
+                <label>About:</label>
+                <input type="checkbox" id="pretty" name="is_pretty" value="Is pretty">
+                <label for="pretty">Pretty</label>
+                
+                <input type="checkbox" id="tall" name="is_tall" value="Is tall">
+                <label for="tall">Tall</label>
+                
+                <input type="checkbox" id="funny" name="is_funny" value="Is funny">
+                <label for="funny">Funny</label>
+              </li>
+              <li>
+                <label>Gender:</label>
+                <input type="radio" id="female" name="gender" value="Female"/>
+                <label for="female">Female</label>
+                
+                <input type="radio" id="male" name="gender" value="Male"/>
+                <label for="male">Male</label>
+                
+                <input type="radio" id="other" name="gender" value="Other"/>
+                <label for="other">Other</label>
+              </li>
+              <li>
+                <label for="msg">Info:</label>
+                <textarea id="msg" name="user_message"></textarea>
+              </li>
+              <li class="button">
+                <button type="submit" value="send your message">Send your message</button>
+              </li>
+            </ul>
+        </form>    
+    </body>
+</html>
