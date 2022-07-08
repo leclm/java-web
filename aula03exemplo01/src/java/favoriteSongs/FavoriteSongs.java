@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package personalData;
+package favoriteSongs;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,12 +12,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+
 /**
  *
  * @author lelim
  */
-@WebServlet(name = "PersonalData", urlPatterns = {"/PersonalData"})
-public class PersonalData extends HttpServlet {
+@WebServlet(name = "FavoriteSongs", urlPatterns = {"/FavoriteSongs"})
+public class FavoriteSongs extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,15 +37,13 @@ public class PersonalData extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Personal Information</title>");            
+            out.println("<title>Favorite Songs</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Infos</h1>");
-            out.println("<p style='color: red'>Name: Letícia</p>");
-            out.println("<p style='color: green'>Adress: Rua xxx, 111</p>");
-            out.println("<p style='color: blue'>Phone number: 99 9 9999-9999</p>");
-            out.println("<a href='https://www.google.com' target='_blank' style='color: orange'>Google</a><br><br>");
-            out.println("<a href='FavoriteSongs' target='_blank' style='color: brown'>Favorite Songs</a>");
+            out.println("<h1>Favorite Songs</h1>");
+            out.println("<p>Aquarela</p>");
+            out.println("<p>5 Patinhos</p>");
+            out.println("<p>Olha a onda</p>");
             out.println("</body>");
             out.println("</html>");
         }
