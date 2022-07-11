@@ -4,22 +4,21 @@
  */
 package servlets;
 
+import jakarta.servlet.ServletContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.net.URLEncoder;
 
 /**
  *
  * @author lelim
  */
-@WebServlet(name = "Processa", urlPatterns = {"/Processa"})
-public class Processa extends HttpServlet {
+@WebServlet(name = "InfoServlet", urlPatterns = {"/InfoServlet"})
+public class InfoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,18 +32,19 @@ public class Processa extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet cookies</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet processa at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        ServletContext ctx = request.getServletContext();
+        response.setContentType("text/html;charset=UTF-8");
+        try(PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html><html><head>");
+            out.println("<title>ServletInfoServlet</title></head><body>");
+            out.println("<p>getContextPath() = " + ctx.getContextPath() + "</p>");
+            out.println("<p>getServletContextName() = "+ ctx.getServletContextName() + "</p>");
+            out.println("<p>getRealPath(\"/\") = "+ ctx.getRealPath("/") + "</p>");
+            out.println("<p>getServerInfo() = "+ ctx.getServerInfo() + "</p>");
+            out.println("<p>getMajorVersion().getMinorVersion() = "+ ctx.getMajorVersion() + "."+ ctx.getMinorVersion() + "</p>");
+            out.println("</body></html>");
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -73,18 +73,7 @@ public class Processa extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        PrintWriter out = response.getWriter();
-        response.setContentType("text/html");
-        String usu = request.getParameter("nome");
-        String sen = request.getParameter("senha");
-        
-        Cookie c = new Cookie("usuario", URLEncoder.encode(usu, "UTF-8"));
-        c.setMaxAge(60 * 60);  // 1 hora
-        response.addCookie(c);
-        out.println("<html><head><title>Teste</title></head><body>Cookie armazenado<br/>");
-        out.println("<a href=\"Leitura\">Ver</a></body></html>");
-        out.flush();
+        processRequest(request, response);
     }
 
     /**
