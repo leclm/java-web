@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package loginServlet;
-
+package servlets;
+import model.bean.Usuario;
+import connection.ConnectionFactory;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +13,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -71,42 +80,42 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try (PrintWriter out = response.getWriter()) {
-            String email = request.getParameter("user_email");  
-            String pw = request.getParameter("user_pw");  
-            if (email.equals(pw) && !email.isEmpty() && !pw.isEmpty()) {
-                out.println("<html><head>");
-                out.println("<title>Sucesso no Login</title><link rel=\"stylesheet\" href=\"./style.css\"></head><body>");
-                out.println("<header><h1>Login realizado com sucesso!</h1></header>");            
-                out.println("<section class=\"content-cards\">");
-                out.println("<div class=\"container\">");
-                out.println("<div class=\"vector-card\">");
-                out.println("<ul>");
-                out.println("<li>");
-                out.println("<p style=\"text-align: center;\">Acesse o Portal Servlet clicando no botão abaixo</p>");
-                out.println("</li>"); 
-                out.println("<li class=\"button\">");
-                out.println("<button><a href=\"PortalServlet\">Portal Servlet</a></button>");
-                out.println("</li>"); 
-                out.println("</ul></div></div></section>");
-                out.println("</body></html>");
-            } else {
-                out.println("<html><head>");
-                out.println("<title>Erro no Login</title><link rel=\"stylesheet\" href=\"./style.css\"></head><body>");
-                out.println("<header><h1>Usuário/Senha não encontrado!</h1></header>");             
-                out.println("<section class=\"content-cards\">");
-                out.println("<div class=\"container\">");
-                out.println("<div class=\"vector-card\">");
-                out.println("<ul>");
-                out.println("<li>");
-                out.println("<p style=\"text-align: center;\">Tente novamente clicando no botão abaixo</p>");
-                out.println("</li>"); 
-                out.println("<li class=\"button\">");
-                out.println("<button><a href=\"./index.html\">Refazer login</a></button>");
-                out.println("</li>"); 
-                out.println("</ul></div></div></section>");
-                out.println("</body></html>");
+        
+        Usuario user = new Usuario();
+        
+        String sql = "SELECT * FROM tb_usuario WHERE login_usuario = '" + request.getParameter("user_email") + 
+                "' and senha_usuario = '" + request.getParameter("user_pw") + "'";
+                
+        Connection con = ConnectionFactory.getConnection();
+        System.out.println("Conexao estabelecida com sucesso!");
+        
+        try {
+            Statement st = con.createStatement();
+            st.executeQuery(sql);
+            ResultSet rs = st.getResultSet();
+            while (rs.next()){
+              user.setEmail(rs.getString("login_usuario"));
+              user.setPw(rs.getString("senha_usuario"));
+              user.setName(rs.getString("nome_usuario"));
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        HttpSession session = request.getSession();
+        
+        if (user.getName() != null){
+            session.setAttribute("usuario", user);
+            
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/PortalServlet");
+            rd.include(request, response);                                  
+        } else {
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/ErroServlet");
+            
+            request.setAttribute("msg", "Usuário/Senha não encontrado! Erro ao acessar a página solicitada");
+            
+            request.setAttribute("page", "index.html");
+            rd.forward(request, response);
         }
     }
 

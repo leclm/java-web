@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package logoutServlet;
+package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -32,6 +32,7 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            out.println("<!DOCTYPE html>");
             out.println("<html><head>");
             out.println("<title>Deslogado</title><link rel=\"stylesheet\" href=\"./style.css\"></head><body>");
             out.println("<header><h1>Usuário deslogado com sucesso!</h1></header>");            

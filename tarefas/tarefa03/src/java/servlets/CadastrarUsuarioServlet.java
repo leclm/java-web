@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package cadastrarUsuarioServlet;
+package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,9 +11,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
-import usuario.Usuario;
+import model.DAO.UsuarioDAO;
+import model.bean.Usuario;
 
 /**
  *
@@ -35,44 +34,16 @@ public class CadastrarUsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession lista = request.getSession();
-            ArrayList<Usuario> listaUsuarios = (ArrayList<Usuario>)request.getAttribute("lista");
-            
-            if (listaUsuarios == null) {
-                listaUsuarios = new ArrayList<>();
-                listaUsuarios.add(new Usuario("123","123","123"));
-                listaUsuarios.add(new Usuario("root","root","root"));
-            }
-            
-            String name = request.getParameter("user_name");
-            String email = request.getParameter("user_email");
-            String pw = request.getParameter("user_pw");
-            
-            Usuario user = new Usuario(name, email, pw);
-            listaUsuarios.add(user);
-            lista.setAttribute("lista", listaUsuarios);
-            
-            out.println("<html><head>");
-            out.println("<title>Cadastrar Usuário</title><link rel=\"stylesheet\" href=\"./style.css\"></head><body>");
-            out.println("<header><h1>Usuário foi cadastrado com sucesso!</h1></header>");            
-            out.println("<section class=\"content-cards\">");
-            out.println("<div class=\"container\">");
-            out.println("<div class=\"vector-card\">");
-            out.println("<ul>");
-            out.println("<li>");
-            out.println("Nome: " + user.getName());
-            out.println("</li>"); 
-            out.println("<li>");
-            out.println("E-mail: " + user.getEmail());
-            out.println("</li>"); 
-            out.println("<li>");
-            out.println("Senha: " + user.getPw());
-            out.println("</li>"); 
-            out.println("<li class=\"button\">");
-            out.println("<button><a href=\"PortalServlet\">Portal Servlet</a></button>");
-            out.println("</li>"); 
-            out.println("</ul></div></div></section>");
-            out.println("</body></html>");
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet sa</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet sa at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
@@ -102,7 +73,38 @@ public class CadastrarUsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Usuario user = new Usuario();
+        UsuarioDAO userDAO = new UsuarioDAO();
+        
+        user.setName(request.getParameter("user_name"));
+        user.setEmail(request.getParameter("user_email"));
+        user.setPw(request.getParameter("user_pw"));
+        
+        userDAO.save(user);
+        
+        PrintWriter out = response.getWriter();
+        out.println("<!DOCTYPE html>");
+        out.println("<html><head>");
+        out.println("<title>Cadastrar Usuário</title><link rel=\"stylesheet\" href=\"./style.css\"></head><body>");
+        out.println("<header><h1>Usuario '" + user.getName() + "' foi cadastrado com sucesso!</h1></header>");      
+        out.println("<section class=\"content-cards\">");
+        out.println("<div class=\"container\">");
+        out.println("<div class=\"vector-card\">");
+        out.println("<ul>");
+        out.println("<li>");
+        out.println("Nome: " + user.getName());
+        out.println("</li>"); 
+        out.println("<li>");
+        out.println("E-mail: " + user.getEmail());
+        out.println("</li>"); 
+        out.println("<li>");
+        out.println("Senha: " + user.getPw());
+        out.println("</li>"); 
+        out.println("<li class=\"button\">");
+        out.println("<button><a href=\"PortalServlet\">Portal Servlet</a></button>");
+        out.println("</li>"); 
+        out.println("</ul></div></div></section>");
+        out.println("</body></html>");
     }
 
     /**
