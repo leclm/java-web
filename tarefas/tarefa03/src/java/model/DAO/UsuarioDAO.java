@@ -21,7 +21,6 @@ public class UsuarioDAO {
         con = ConnectionFactory.getConnection();
     }
    
-    //insere no Banco de Dados (insert)
     public boolean save(Usuario usuario){
         
         String sql = "INSERT into tb_usuario (login_usuario, senha_usuario, nome_usuario) "
@@ -31,10 +30,7 @@ public class UsuarioDAO {
         PreparedStatement st = null;
         
         try {
-            //setString = ?
             st = con.prepareStatement(sql);
-
-            //executa o sql
             st.executeUpdate();
             return true;
         } catch (SQLException ex) {
